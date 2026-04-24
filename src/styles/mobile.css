@@ -1,0 +1,668 @@
+/* ================================================================
+   Lark — mobile.css  (скомпилированная версия _mobile.scss)
+   
+   ЕСЛИ НЕ ИСПОЛЬЗУЕШЬ SCSS — подключи этот файл напрямую:
+   В src/styles/globals.css добавь в самый конец:
+   @import './mobile.css';
+   
+   Или в App.jsx добавь отдельной строкой:
+   import './styles/mobile.css';
+   
+   ВАЖНО: этот файл должен подключаться ПОСЛЕ globals.css
+   чтобы оверрайды работали.
+   ================================================================ */
+
+/* ================================================================
+   1. ГЛОБАЛЬНЫЙ АНТИOVERFLOW
+   ================================================================ */
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ================================================================
+   2. ≤ 1000px — ПЛАНШЕТ / ШИРОКИЙ МОБИЛЬНЫЙ
+   ================================================================ */
+
+@media (max-width: 1000px) {
+  .wrap {
+    padding: 0 16px;
+    overflow-x: hidden;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 10px;
+    justify-content: space-between;
+  }
+
+  /* Hero headline: clamp(72px,12vw,180px) → слишком большой на 375px */
+  .hero-headline {
+    font-size: clamp(40px, 11vw, 68px);
+    line-height: 0.88;
+    overflow: hidden;
+  }
+
+  /* Убираем rotate — он сдвигает текст за viewport */
+  .hero-headline .rotate {
+    display: inline;
+    transform: none;
+  }
+
+  .hero-headline .small {
+    font-size: 0.38em;
+    vertical-align: super;
+  }
+
+  .hero {
+    padding: 28px 0 72px;
+  }
+
+  .hero-body {
+    margin-top: 40px;
+    padding-top: 24px;
+  }
+
+  .hero-stats {
+    margin-top: 40px;
+  }
+
+  .hero-stats .stat-num {
+    font-size: 36px;
+  }
+
+  /* How it Works */
+  .schematic {
+    padding: 72px 0;
+  }
+
+  .schematic-header h2 {
+    font-size: clamp(32px, 8vw, 56px);
+  }
+
+  .schematic-diagram {
+    padding: 28px 16px;
+  }
+
+  .schematic-diagram::before,
+  .schematic-diagram::after {
+    display: none;
+  }
+
+  /* Spread */
+  .spread {
+    padding: 72px 0;
+  }
+
+  .spread-left h2 {
+    font-size: clamp(28px, 7.5vw, 44px);
+    line-height: 0.93;
+    margin-bottom: 24px;
+  }
+
+  .spread-left p.lede {
+    font-size: 16px;
+    max-width: none;
+  }
+
+  /* Feature Grid */
+  .features {
+    padding: 72px 0;
+  }
+
+  .features-head h2 {
+    font-size: clamp(40px, 10vw, 64px);
+  }
+
+  .column-num {
+    font-size: 72px;
+    line-height: 0.85;
+  }
+
+  /* Larkins */
+  .assistant {
+    padding: 72px 0;
+  }
+
+  .assistant h2 {
+    font-size: clamp(36px, 9.5vw, 56px);
+    line-height: 0.88;
+    margin: 16px 0 20px;
+  }
+
+  .assistant p {
+    font-size: 15px;
+    max-width: none;
+  }
+
+  .terminal::before {
+    font-size: 9px;
+    left: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .terminal-actions {
+    flex-wrap: wrap;
+  }
+
+  .terminal-actions button {
+    flex: 0 0 50%;
+    padding: 12px 8px;
+  }
+
+  .terminal-actions button:nth-child(3) {
+    flex: 0 0 100%;
+    border-right: none;
+    border-top: 1px dashed var(--lark-border-2);
+  }
+
+  /* CTA Banner */
+  .finale {
+    padding: 80px 0;
+  }
+
+  .finale h2 {
+    font-size: clamp(44px, 12vw, 72px);
+    line-height: 0.88;
+    margin-bottom: 32px;
+  }
+
+  .finale::before,
+  .finale::after {
+    left: 16px;
+    right: 16px;
+    font-size: 11px;
+    letter-spacing: 0.8em;
+  }
+
+  .finale-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .finale-ctas .dark,
+  .finale-ctas .darkline {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* About page */
+  .page-hero {
+    padding: 24px 0 48px;
+  }
+
+  .about-intro {
+    padding: 48px 0;
+  }
+
+  .about-lede p {
+    font-size: 16px;
+    max-width: none;
+  }
+
+  .principle {
+    padding: 24px 0;
+  }
+
+  .principle-title {
+    font-size: 22px;
+  }
+
+  .principle-body {
+    font-size: 14px;
+  }
+
+  .timeline-sec {
+    padding: 64px 0;
+  }
+
+  .tl-title {
+    font-size: 16px;
+  }
+
+  .cta-strip-inner h3 {
+    font-size: 28px;
+  }
+
+  .colophon {
+    padding: 48px 0 0;
+  }
+
+  .colophon-brand .wordmark {
+    font-size: 36px !important;
+  }
+}
+
+/* ================================================================
+   3. ≤ 600px — МОБИЛЬНЫЙ
+   ================================================================ */
+
+@media (max-width: 600px) {
+  .hero-headline {
+    font-size: 48px;
+  }
+
+  .hero {
+    padding: 20px 0 56px;
+  }
+
+  .hero-stats .stat-num {
+    font-size: 32px;
+  }
+  .hero-stats .stat-label {
+    font-size: 9px;
+  }
+
+  /* ID Card (StudentCard) */
+  .id-card-body {
+    grid-template-columns: 80px 1fr;
+    gap: 14px;
+    padding: 20px 16px;
+    align-items: start;
+  }
+
+  .photo-block {
+    width: 80px;
+    height: 100px;
+    font-size: 26px;
+  }
+
+  .id-info h3 {
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+
+  .id-field {
+    grid-template-columns: 64px 1fr;
+    font-size: 12px;
+  }
+
+  .id-section {
+    padding: 14px 16px;
+  }
+
+  .id-stamp {
+    right: -6px;
+    top: 32px;
+    font-size: 10px;
+    padding: 5px 9px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Project Sheet */
+  .sheet-body {
+    padding: 18px 16px;
+  }
+
+  .sheet-title {
+    font-size: 20px;
+  }
+
+  .sheet-sub {
+    font-size: 10px;
+    margin-bottom: 18px;
+  }
+
+  .milestone-rail {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 16px;
+  }
+
+  .milestone {
+    padding: 12px 8px 10px;
+  }
+
+  .milestone-name {
+    font-size: 12px;
+  }
+
+  .sheet-meta .v {
+    font-size: 18px;
+  }
+
+  .team-box .init {
+    font-size: 16px;
+  }
+  .team-box .role {
+    font-size: 9px;
+  }
+
+  /* Schematic */
+  .schematic {
+    padding: 56px 0;
+  }
+
+  .schematic-header h2 {
+    font-size: 36px;
+  }
+
+  .node-title {
+    font-size: 22px;
+  }
+
+  /* Spread */
+  .spread {
+    padding: 56px 0;
+  }
+
+  .spread-left h2 {
+    font-size: 32px;
+  }
+
+  .spread-left p.lede {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .index-list li {
+    font-size: 14px;
+    padding: 12px 0;
+    grid-template-columns: 36px 1fr;
+  }
+
+  /* Feature Grid */
+  .features {
+    padding: 56px 0;
+  }
+
+  .features-head h2 {
+    font-size: 48px;
+  }
+
+  .column-num {
+    font-size: 64px;
+  }
+
+  .column h3 {
+    font-size: 22px;
+  }
+
+  /* Larkins */
+  .assistant {
+    padding: 56px 0;
+  }
+
+  .assistant h2 {
+    font-size: 40px;
+  }
+
+  .t-line .who {
+    width: 44px;
+    font-size: 10px;
+  }
+  .t-line .msg {
+    font-size: 12px;
+  }
+
+  /* CTA Banner */
+  .finale {
+    padding: 64px 0;
+  }
+
+  .finale h2 {
+    font-size: 52px;
+  }
+
+  /* Team Page */
+  .team-card {
+    grid-template-columns: 80px 1fr;
+    gap: 14px;
+    padding: 20px 16px;
+  }
+
+  .team-photo {
+    width: 80px;
+    height: 100px;
+    font-size: 28px;
+  }
+
+  .team-card h3 {
+    font-size: 18px;
+  }
+
+  .team-bio {
+    font-size: 12px;
+  }
+
+  .advisor {
+    padding: 16px;
+  }
+
+  .advisor-photo {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .advisor-name {
+    font-size: 15px;
+  }
+
+  /* Form */
+  .apply-sec {
+    padding: 32px 0 80px;
+  }
+
+  .form-sheet {
+    border-left: none;
+    border-right: none;
+    max-width: 100%;
+  }
+
+  .form-body {
+    padding: 20px 16px;
+  }
+
+  .role-opt {
+    padding: 14px;
+  }
+
+  .role-t {
+    font-size: 15px;
+  }
+
+  /* Footer */
+  .colophon {
+    padding: 40px 0 0;
+  }
+
+  .colophon-brand .wordmark {
+    font-size: 32px !important;
+  }
+
+  .colophon-brand p {
+    font-size: 10px;
+  }
+
+  .colophon-col a {
+    font-size: 12px;
+    padding: 4px 0;
+  }
+}
+
+/* ================================================================
+   4. ≤ 420px — МАЛЕНЬКИЙ ТЕЛЕФОН (iPhone SE, 375px)
+   ================================================================ */
+
+@media (max-width: 420px) {
+  .wrap {
+    padding: 0 14px;
+  }
+
+  .hero-headline {
+    font-size: 44px;
+    line-height: 0.86;
+  }
+
+  .hero-meta {
+    font-size: 9px;
+    gap: 4px 12px;
+  }
+
+  .schematic-header h2 {
+    font-size: 34px;
+  }
+  .spread-left h2 {
+    font-size: 30px;
+  }
+  .features-head h2 {
+    font-size: 44px;
+  }
+  .column-num {
+    font-size: 58px;
+  }
+  .column h3 {
+    font-size: 20px;
+  }
+  .assistant h2 {
+    font-size: 38px;
+  }
+
+  .finale h2 {
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+
+  .stat {
+    padding: 18px 12px;
+  }
+
+  .stat-num {
+    font-size: 28px;
+  }
+  .stat-label {
+    font-size: 9px;
+  }
+
+  /* ID Card */
+  .id-card-body {
+    grid-template-columns: 72px 1fr;
+    gap: 12px;
+    padding: 16px 14px;
+  }
+
+  .photo-block {
+    width: 72px;
+    height: 90px;
+    font-size: 24px;
+  }
+
+  .id-info h3 {
+    font-size: 16px;
+  }
+
+  .id-field {
+    grid-template-columns: 58px 1fr;
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  /* Project Sheet */
+  .sheet-title {
+    font-size: 18px;
+  }
+  .milestone-label {
+    font-size: 9px;
+  }
+  .milestone-name {
+    font-size: 11px;
+  }
+  .sheet-meta .v {
+    font-size: 16px;
+  }
+
+  /* Buttons */
+  .cta-big {
+    font-size: 14px;
+    padding: 14px 20px;
+    gap: 10px;
+  }
+
+  .cta-ghost {
+    font-size: 10px;
+    padding: 14px 18px;
+  }
+
+  /* Team */
+  .team-card {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .team-photo {
+    width: 72px;
+    height: 90px;
+    font-size: 24px;
+  }
+
+  /* Form */
+  .role-t {
+    font-size: 14px;
+  }
+
+  .cta-strip-inner h3 {
+    font-size: 24px;
+  }
+
+  .colophon-brand .wordmark {
+    font-size: 28px !important;
+  }
+}
+
+/* ================================================================
+   5. ≤ 360px — ОЧЕНЬ МАЛЕНЬКИЙ ЭКРАН
+   ================================================================ */
+
+@media (max-width: 360px) {
+  .hero-headline {
+    font-size: 38px;
+  }
+  .features-head h2 {
+    font-size: 38px;
+  }
+  .finale h2 {
+    font-size: 42px;
+  }
+  .assistant h2 {
+    font-size: 34px;
+  }
+  .spread-left h2 {
+    font-size: 28px;
+  }
+  .schematic-header h2 {
+    font-size: 30px;
+  }
+
+  /* Milestone: стопка вместо 2 колонок */
+  .milestone-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .milestone {
+    border-left: none;
+    border-bottom: 1px dashed var(--lark-border-2);
+    padding: 10px 0;
+  }
+
+  .milestone:last-child {
+    border-bottom: none;
+  }
+
+  .id-field {
+    grid-template-columns: 52px 1fr;
+    font-size: 10px;
+  }
+}
