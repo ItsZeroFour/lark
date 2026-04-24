@@ -1,668 +1,299 @@
 /* ================================================================
-   Lark — mobile.css  (скомпилированная версия _mobile.scss)
-   
-   ЕСЛИ НЕ ИСПОЛЬЗУЕШЬ SCSS — подключи этот файл напрямую:
-   В src/styles/globals.css добавь в самый конец:
-   @import './mobile.css';
-   
-   Или в App.jsx добавь отдельной строкой:
-   import './styles/mobile.css';
-   
-   ВАЖНО: этот файл должен подключаться ПОСЛЕ globals.css
-   чтобы оверрайды работали.
+   Lark — mobile.css  v2
+   Подключить в конец globals.css:  @import './mobile.css';
+   или в App.jsx второй строкой:    import './styles/mobile.css';
    ================================================================ */
 
-/* ================================================================
-   1. ГЛОБАЛЬНЫЙ АНТИOVERFLOW
-   ================================================================ */
-
-html,
-body {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
-h1,
-h2,
-h3 {
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
+html, body { overflow-x: hidden; max-width: 100vw; }
+h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
 
 /* ================================================================
-   2. ≤ 1000px — ПЛАНШЕТ / ШИРОКИЙ МОБИЛЬНЫЙ
+   1. ПОЛНОЭКРАННОЕ ОВЕРЛЕЙ-МЕНЮ
    ================================================================ */
 
 @media (max-width: 1000px) {
-  .wrap {
-    padding: 0 16px;
-    overflow-x: hidden;
-  }
+  .topbar-sheet { display: none !important; }
+}
 
-  .hero-meta {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-    font-size: 10px;
-    justify-content: space-between;
-  }
+.nav-overlay {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: var(--lark-canvas);
+  z-index: 200;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
 
-  /* Hero headline: clamp(72px,12vw,180px) → слишком большой на 375px */
+.nav-overlay-header {
+  display: flex; align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--lark-fg);
+  flex-shrink: 0;
+}
+
+.nav-overlay-header .topbar-ticker { flex: 1; }
+.nav-overlay-header .wordmark { margin: 0 16px 0 0; }
+
+.nav-overlay-links {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 0 24px; gap: 0;
+  overflow: hidden;
+}
+
+.nav-overlay-link {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--lark-border-2);
+  color: var(--lark-fg);
+  text-decoration: none;
+  transition: color 150ms;
+}
+.nav-overlay-link:first-child { border-top: 1px solid var(--lark-border-2); }
+.nav-overlay-link:hover,
+.nav-overlay-link.is-active { color: var(--lark-accent); }
+
+.nav-overlay-num {
+  font-family: var(--lark-font-mono); font-size: 11px;
+  letter-spacing: 0.12em; color: var(--lark-fg-4);
+  width: 28px; flex-shrink: 0;
+}
+
+.nav-overlay-label {
+  font-family: var(--lark-font-display); font-size: 30px;
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1; flex: 1;
+}
+.nav-overlay-link.is-active .nav-overlay-label { color: var(--lark-accent); }
+
+.nav-overlay-arrow {
+  font-size: 18px; color: var(--lark-fg-4);
+  transition: color 150ms, transform 150ms;
+}
+.nav-overlay-link:hover .nav-overlay-arrow { color: var(--lark-accent); transform: translateX(4px); }
+
+.nav-overlay-footer {
+  padding: 20px 24px 32px; flex-shrink: 0;
+  border-top: 1px solid var(--lark-border-2);
+}
+
+.nav-overlay-cta {
+  display: block; width: 100%; padding: 16px 24px;
+  background: var(--lark-accent); color: #0E0E0E;
+  font-family: var(--lark-font-display); font-size: 14px; font-weight: 700;
+  letter-spacing: -0.01em; text-transform: uppercase;
+  text-align: center; text-decoration: none;
+}
+.nav-overlay-cta:hover { background: var(--lark-accent-hover); }
+
+/* Бургер → крестик */
+.topbar-burger span { transition: transform 200ms, opacity 150ms; }
+.topbar-burger.is-open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.topbar-burger.is-open span:nth-child(2) { opacity: 0; }
+.topbar-burger.is-open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+/* ================================================================
+   2. ≤ 1000px
+   ================================================================ */
+
+@media (max-width: 1000px) {
+
+  .wrap { padding: 0 16px; overflow-x: hidden; }
+
+  .topbar-inner { padding: 12px 16px; }
+  .topbar-inner .wordmark { flex: 1; justify-content: center; margin-left: 0; }
+  .topbar-burger { flex: none; margin: 0; }
+
   .hero-headline {
-    font-size: clamp(40px, 11vw, 68px);
-    line-height: 0.88;
-    overflow: hidden;
+    font-size: clamp(36px, 9.5vw, 56px) !important;
+    line-height: 0.90 !important; overflow: hidden;
   }
+  .hero-headline .rotate { display: inline !important; transform: none !important; }
+  .hero-headline .small  { font-size: 0.38em; vertical-align: super; }
 
-  /* Убираем rotate — он сдвигает текст за viewport */
-  .hero-headline .rotate {
-    display: inline;
-    transform: none;
-  }
+  .hero { padding: 24px 0 64px; }
+  .hero-meta { flex-wrap: wrap; gap: 4px 16px; font-size: 10px; justify-content: space-between; }
+  .hero-body { margin-top: 36px; padding-top: 24px; gap: 24px; }
+  .hero-stats { margin-top: 36px; }
+  .stat-num { font-size: 36px !important; }
 
-  .hero-headline .small {
-    font-size: 0.38em;
-    vertical-align: super;
-  }
+  .schematic { padding: 64px 0; }
+  .schematic-header h2 { font-size: clamp(28px, 7vw, 44px) !important; }
+  .schematic-diagram { padding: 24px 14px; }
+  .schematic-diagram::before, .schematic-diagram::after { display: none; }
+  .node-title { font-size: 20px; }
 
-  .hero {
-    padding: 28px 0 72px;
-  }
+  .spread { padding: 64px 0; }
+  .spread-left h2 { font-size: clamp(26px, 7vw, 40px) !important; line-height: 0.95 !important; margin-bottom: 20px; }
+  .spread-left p.lede { font-size: 15px; max-width: none; }
 
-  .hero-body {
-    margin-top: 40px;
-    padding-top: 24px;
-  }
+  .features { padding: 64px 0; }
+  .features-head h2 { font-size: clamp(36px, 9vw, 56px) !important; }
+  .column-num { font-size: 64px !important; line-height: 0.85; }
+  .column h3  { font-size: 20px; }
 
-  .hero-stats {
-    margin-top: 40px;
-  }
+  .assistant { padding: 64px 0; }
+  .assistant h2 { font-size: clamp(32px, 8.5vw, 52px) !important; line-height: 0.90 !important; margin: 12px 0 18px; }
+  .assistant p  { font-size: 15px; max-width: none; }
+  .terminal::before { font-size: 9px; left: 14px; letter-spacing: 0.1em; }
+  .terminal-actions { flex-wrap: wrap; }
+  .terminal-actions button { flex: 0 0 50%; padding: 12px 8px; }
+  .terminal-actions button:nth-child(3) { flex: 0 0 100%; border-right: none; border-top: 1px dashed var(--lark-border-2); }
 
-  .hero-stats .stat-num {
-    font-size: 36px;
-  }
+  .finale { padding: 72px 0; }
+  .finale h2 { font-size: clamp(40px, 11vw, 64px) !important; line-height: 0.88 !important; margin-bottom: 28px; }
+  .finale::before, .finale::after { left: 14px; right: 14px; font-size: 10px; letter-spacing: 0.6em; }
+  .finale-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
+  .finale-ctas .dark, .finale-ctas .darkline { display: block; text-align: center; width: 100%; }
 
-  /* How it Works */
-  .schematic {
-    padding: 72px 0;
-  }
+  .page-hero { padding: 24px 0 48px; }
+  .about-intro { padding: 48px 0; }
+  .about-lede p { font-size: 15px; max-width: none; }
+  .principle { padding: 20px 0; }
+  .principle-title { font-size: 20px; }
+  .principle-body  { font-size: 13px; }
+  .tl-title { font-size: 15px; }
 
-  .schematic-header h2 {
-    font-size: clamp(32px, 8vw, 56px);
-  }
+  .cta-strip-inner h3 { font-size: 28px !important; }
 
-  .schematic-diagram {
-    padding: 28px 16px;
-  }
-
-  .schematic-diagram::before,
-  .schematic-diagram::after {
-    display: none;
-  }
-
-  /* Spread */
-  .spread {
-    padding: 72px 0;
-  }
-
-  .spread-left h2 {
-    font-size: clamp(28px, 7.5vw, 44px);
-    line-height: 0.93;
-    margin-bottom: 24px;
-  }
-
-  .spread-left p.lede {
-    font-size: 16px;
-    max-width: none;
-  }
-
-  /* Feature Grid */
-  .features {
-    padding: 72px 0;
-  }
-
-  .features-head h2 {
-    font-size: clamp(40px, 10vw, 64px);
-  }
-
-  .column-num {
-    font-size: 72px;
-    line-height: 0.85;
-  }
-
-  /* Larkins */
-  .assistant {
-    padding: 72px 0;
-  }
-
-  .assistant h2 {
-    font-size: clamp(36px, 9.5vw, 56px);
-    line-height: 0.88;
-    margin: 16px 0 20px;
-  }
-
-  .assistant p {
-    font-size: 15px;
-    max-width: none;
-  }
-
-  .terminal::before {
-    font-size: 9px;
-    left: 16px;
-    letter-spacing: 0.1em;
-  }
-
-  .terminal-actions {
-    flex-wrap: wrap;
-  }
-
-  .terminal-actions button {
-    flex: 0 0 50%;
-    padding: 12px 8px;
-  }
-
-  .terminal-actions button:nth-child(3) {
-    flex: 0 0 100%;
-    border-right: none;
-    border-top: 1px dashed var(--lark-border-2);
-  }
-
-  /* CTA Banner */
-  .finale {
-    padding: 80px 0;
-  }
-
-  .finale h2 {
-    font-size: clamp(44px, 12vw, 72px);
-    line-height: 0.88;
-    margin-bottom: 32px;
-  }
-
-  .finale::before,
-  .finale::after {
-    left: 16px;
-    right: 16px;
-    font-size: 11px;
-    letter-spacing: 0.8em;
-  }
-
-  .finale-ctas {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .finale-ctas .dark,
-  .finale-ctas .darkline {
-    display: block;
-    text-align: center;
-    width: 100%;
-  }
-
-  /* About page */
-  .page-hero {
-    padding: 24px 0 48px;
-  }
-
-  .about-intro {
-    padding: 48px 0;
-  }
-
-  .about-lede p {
-    font-size: 16px;
-    max-width: none;
-  }
-
-  .principle {
-    padding: 24px 0;
-  }
-
-  .principle-title {
-    font-size: 22px;
-  }
-
-  .principle-body {
-    font-size: 14px;
-  }
-
-  .timeline-sec {
-    padding: 64px 0;
-  }
-
-  .tl-title {
-    font-size: 16px;
-  }
-
-  .cta-strip-inner h3 {
-    font-size: 28px;
-  }
-
-  .colophon {
-    padding: 48px 0 0;
-  }
-
-  .colophon-brand .wordmark {
-    font-size: 36px !important;
-  }
+  .colophon { padding: 40px 0 0; }
+  .colophon-brand .wordmark { font-size: 32px !important; }
 }
 
 /* ================================================================
-   3. ≤ 600px — МОБИЛЬНЫЙ
+   3. ≤ 600px
    ================================================================ */
 
 @media (max-width: 600px) {
-  .hero-headline {
-    font-size: 48px;
-  }
 
-  .hero {
-    padding: 20px 0 56px;
-  }
+  .hero-headline { font-size: 44px !important; }
+  .hero { padding: 18px 0 52px; }
+  .stat-num   { font-size: 30px !important; }
+  .stat-label { font-size: 9px; }
+  .stat       { padding: 18px 14px; }
 
-  .hero-stats .stat-num {
-    font-size: 32px;
-  }
-  .hero-stats .stat-label {
-    font-size: 9px;
-  }
+  /* ID Card */
+  .id-card-body { grid-template-columns: 80px 1fr; gap: 14px; padding: 18px 14px; align-items: start; }
+  .photo-block  { width: 80px; height: 100px; font-size: 26px; }
+  .id-info h3   { font-size: 17px; margin: 0 0 8px; }
+  .id-field     { grid-template-columns: 60px 1fr; font-size: 11px; gap: 6px; }
+  .id-section   { padding: 12px 14px; }
+  .id-stamp     { position: static; display: inline-block; transform: rotate(3deg); margin: 12px 14px 4px auto; font-size: 10px; padding: 5px 10px; letter-spacing: 0.04em; }
 
-  /* ID Card (StudentCard) */
-  .id-card-body {
-    grid-template-columns: 80px 1fr;
-    gap: 14px;
-    padding: 20px 16px;
-    align-items: start;
-  }
+  /* Sheet */
+  .sheet-body    { padding: 16px 14px; }
+  .sheet-title   { font-size: 20px; }
+  .sheet-sub     { font-size: 10px; margin-bottom: 16px; }
+  .milestone-rail { grid-template-columns: 1fr 1fr; margin-bottom: 14px; }
+  .milestone     { padding: 10px 8px; }
+  .milestone-label { font-size: 9px; }
+  .milestone-name  { font-size: 11px; }
+  .sheet-meta .v   { font-size: 17px; }
+  .team-box        { padding: 10px 6px; }
+  .team-box .init  { font-size: 15px; }
+  .team-box .role  { font-size: 8px; }
 
-  .photo-block {
-    width: 80px;
-    height: 100px;
-    font-size: 26px;
-  }
+  .schematic { padding: 52px 0; }
+  .schematic-header h2 { font-size: 32px !important; }
+  .node-title { font-size: 18px; }
 
-  .id-info h3 {
-    font-size: 18px;
-    margin: 0 0 8px;
-  }
+  .spread { padding: 52px 0; }
+  .spread-left h2 { font-size: 28px !important; }
+  .index-list li  { font-size: 13px; padding: 10px 0; grid-template-columns: 32px 1fr; }
 
-  .id-field {
-    grid-template-columns: 64px 1fr;
-    font-size: 12px;
-  }
+  .features { padding: 52px 0; }
+  .features-head h2 { font-size: 44px !important; }
+  .column-num { font-size: 56px !important; }
+  .column h3  { font-size: 19px; }
 
-  .id-section {
-    padding: 14px 16px;
-  }
+  .assistant { padding: 52px 0; }
+  .assistant h2 { font-size: 36px !important; }
+  .t-line .who  { width: 42px; font-size: 10px; }
+  .t-line .msg  { font-size: 12px; }
 
-  .id-stamp {
-    right: -6px;
-    top: 32px;
-    font-size: 10px;
-    padding: 5px 9px;
-    letter-spacing: 0.04em;
-  }
+  .finale { padding: 60px 0; }
+  .finale h2 { font-size: 48px !important; }
 
-  /* Project Sheet */
-  .sheet-body {
-    padding: 18px 16px;
-  }
+  .team-card  { grid-template-columns: 76px 1fr; gap: 12px; padding: 18px 14px; }
+  .team-photo { width: 76px; height: 96px; font-size: 26px; }
+  .team-card h3 { font-size: 16px; }
+  .team-bio     { font-size: 12px; }
+  .advisor      { padding: 14px; }
+  .advisor-photo { width: 44px; height: 44px; font-size: 16px; }
+  .advisor-name  { font-size: 14px; }
 
-  .sheet-title {
-    font-size: 20px;
-  }
+  .apply-sec    { padding: 28px 0 72px; }
+  .form-sheet   { border-left: none; border-right: none; max-width: 100%; }
+  .form-body    { padding: 18px 14px; }
+  .role-opt     { padding: 12px; }
+  .role-t       { font-size: 14px; }
 
-  .sheet-sub {
-    font-size: 10px;
-    margin-bottom: 18px;
-  }
-
-  .milestone-rail {
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 16px;
-  }
-
-  .milestone {
-    padding: 12px 8px 10px;
-  }
-
-  .milestone-name {
-    font-size: 12px;
-  }
-
-  .sheet-meta .v {
-    font-size: 18px;
-  }
-
-  .team-box .init {
-    font-size: 16px;
-  }
-  .team-box .role {
-    font-size: 9px;
-  }
-
-  /* Schematic */
-  .schematic {
-    padding: 56px 0;
-  }
-
-  .schematic-header h2 {
-    font-size: 36px;
-  }
-
-  .node-title {
-    font-size: 22px;
-  }
-
-  /* Spread */
-  .spread {
-    padding: 56px 0;
-  }
-
-  .spread-left h2 {
-    font-size: 32px;
-  }
-
-  .spread-left p.lede {
-    font-size: 15px;
-    margin-bottom: 28px;
-  }
-
-  .index-list li {
-    font-size: 14px;
-    padding: 12px 0;
-    grid-template-columns: 36px 1fr;
-  }
-
-  /* Feature Grid */
-  .features {
-    padding: 56px 0;
-  }
-
-  .features-head h2 {
-    font-size: 48px;
-  }
-
-  .column-num {
-    font-size: 64px;
-  }
-
-  .column h3 {
-    font-size: 22px;
-  }
-
-  /* Larkins */
-  .assistant {
-    padding: 56px 0;
-  }
-
-  .assistant h2 {
-    font-size: 40px;
-  }
-
-  .t-line .who {
-    width: 44px;
-    font-size: 10px;
-  }
-  .t-line .msg {
-    font-size: 12px;
-  }
-
-  /* CTA Banner */
-  .finale {
-    padding: 64px 0;
-  }
-
-  .finale h2 {
-    font-size: 52px;
-  }
-
-  /* Team Page */
-  .team-card {
-    grid-template-columns: 80px 1fr;
-    gap: 14px;
-    padding: 20px 16px;
-  }
-
-  .team-photo {
-    width: 80px;
-    height: 100px;
-    font-size: 28px;
-  }
-
-  .team-card h3 {
-    font-size: 18px;
-  }
-
-  .team-bio {
-    font-size: 12px;
-  }
-
-  .advisor {
-    padding: 16px;
-  }
-
-  .advisor-photo {
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
-  }
-
-  .advisor-name {
-    font-size: 15px;
-  }
-
-  /* Form */
-  .apply-sec {
-    padding: 32px 0 80px;
-  }
-
-  .form-sheet {
-    border-left: none;
-    border-right: none;
-    max-width: 100%;
-  }
-
-  .form-body {
-    padding: 20px 16px;
-  }
-
-  .role-opt {
-    padding: 14px;
-  }
-
-  .role-t {
-    font-size: 15px;
-  }
-
-  /* Footer */
-  .colophon {
-    padding: 40px 0 0;
-  }
-
-  .colophon-brand .wordmark {
-    font-size: 32px !important;
-  }
-
-  .colophon-brand p {
-    font-size: 10px;
-  }
-
-  .colophon-col a {
-    font-size: 12px;
-    padding: 4px 0;
-  }
+  .colophon-brand .wordmark { font-size: 28px !important; }
+  .colophon-brand p { font-size: 10px; }
+  .colophon-col a   { font-size: 12px; padding: 3px 0; }
 }
 
 /* ================================================================
-   4. ≤ 420px — МАЛЕНЬКИЙ ТЕЛЕФОН (iPhone SE, 375px)
+   4. ≤ 420px  (iPhone SE, 375px)
    ================================================================ */
 
 @media (max-width: 420px) {
-  .wrap {
-    padding: 0 14px;
-  }
 
-  .hero-headline {
-    font-size: 44px;
-    line-height: 0.86;
-  }
+  .wrap { padding: 0 12px; }
 
-  .hero-meta {
-    font-size: 9px;
-    gap: 4px 12px;
-  }
+  .hero-headline    { font-size: 40px !important; line-height: 0.87 !important; }
+  .hero-meta        { font-size: 9px; gap: 3px 10px; }
 
-  .schematic-header h2 {
-    font-size: 34px;
-  }
-  .spread-left h2 {
-    font-size: 30px;
-  }
-  .features-head h2 {
-    font-size: 44px;
-  }
-  .column-num {
-    font-size: 58px;
-  }
-  .column h3 {
-    font-size: 20px;
-  }
-  .assistant h2 {
-    font-size: 38px;
-  }
+  .schematic-header h2  { font-size: 30px !important; }
+  .spread-left h2       { font-size: 26px !important; }
+  .features-head h2     { font-size: 40px !important; }
+  .column-num           { font-size: 52px !important; }
+  .column h3            { font-size: 18px; }
+  .assistant h2         { font-size: 34px !important; }
+  .finale h2            { font-size: 44px !important; }
+  .cta-strip-inner h3   { font-size: 22px !important; }
 
-  .finale h2 {
-    font-size: 48px;
-    margin-bottom: 24px;
-  }
+  .stat       { padding: 16px 10px; }
+  .stat-num   { font-size: 26px !important; }
+  .stat-label { font-size: 8px; }
 
-  .stat {
-    padding: 18px 12px;
-  }
+  .id-card-body  { grid-template-columns: 68px 1fr; gap: 10px; padding: 14px 12px; }
+  .photo-block   { width: 68px; height: 86px; font-size: 22px; }
+  .id-info h3    { font-size: 15px; }
+  .id-field      { grid-template-columns: 54px 1fr; font-size: 10px; gap: 4px; }
 
-  .stat-num {
-    font-size: 28px;
-  }
-  .stat-label {
-    font-size: 9px;
-  }
+  .sheet-title   { font-size: 17px; }
+  .sheet-meta .v { font-size: 15px; }
 
-  /* ID Card */
-  .id-card-body {
-    grid-template-columns: 72px 1fr;
-    gap: 12px;
-    padding: 16px 14px;
-  }
+  .cta-big   { font-size: 13px; padding: 13px 18px; gap: 8px; }
+  .cta-ghost { font-size: 10px; padding: 13px 16px; }
 
-  .photo-block {
-    width: 72px;
-    height: 90px;
-    font-size: 24px;
-  }
+  .team-card    { grid-template-columns: 68px 1fr; }
+  .team-photo   { width: 68px; height: 86px; font-size: 22px; }
+  .team-card h3 { font-size: 15px; }
 
-  .id-info h3 {
-    font-size: 16px;
-  }
+  .nav-overlay-label { font-size: 26px; }
+  .nav-overlay-link  { padding: 16px 0; }
 
-  .id-field {
-    grid-template-columns: 58px 1fr;
-    font-size: 11px;
-    gap: 6px;
-  }
-
-  /* Project Sheet */
-  .sheet-title {
-    font-size: 18px;
-  }
-  .milestone-label {
-    font-size: 9px;
-  }
-  .milestone-name {
-    font-size: 11px;
-  }
-  .sheet-meta .v {
-    font-size: 16px;
-  }
-
-  /* Buttons */
-  .cta-big {
-    font-size: 14px;
-    padding: 14px 20px;
-    gap: 10px;
-  }
-
-  .cta-ghost {
-    font-size: 10px;
-    padding: 14px 18px;
-  }
-
-  /* Team */
-  .team-card {
-    grid-template-columns: 72px 1fr;
-  }
-
-  .team-photo {
-    width: 72px;
-    height: 90px;
-    font-size: 24px;
-  }
-
-  /* Form */
-  .role-t {
-    font-size: 14px;
-  }
-
-  .cta-strip-inner h3 {
-    font-size: 24px;
-  }
-
-  .colophon-brand .wordmark {
-    font-size: 28px !important;
-  }
+  .colophon-brand .wordmark { font-size: 26px !important; }
 }
 
 /* ================================================================
-   5. ≤ 360px — ОЧЕНЬ МАЛЕНЬКИЙ ЭКРАН
+   5. ≤ 360px
    ================================================================ */
 
 @media (max-width: 360px) {
-  .hero-headline {
-    font-size: 38px;
-  }
-  .features-head h2 {
-    font-size: 38px;
-  }
-  .finale h2 {
-    font-size: 42px;
-  }
-  .assistant h2 {
-    font-size: 34px;
-  }
-  .spread-left h2 {
-    font-size: 28px;
-  }
-  .schematic-header h2 {
-    font-size: 30px;
-  }
 
-  /* Milestone: стопка вместо 2 колонок */
-  .milestone-rail {
-    grid-template-columns: 1fr;
-  }
+  .hero-headline       { font-size: 36px !important; }
+  .finale h2           { font-size: 38px !important; }
+  .assistant h2        { font-size: 30px !important; }
+  .features-head h2    { font-size: 34px !important; }
+  .spread-left h2      { font-size: 24px !important; }
+  .schematic-header h2 { font-size: 26px !important; }
+  .column-num          { font-size: 46px !important; }
 
-  .milestone {
-    border-left: none;
-    border-bottom: 1px dashed var(--lark-border-2);
-    padding: 10px 0;
-  }
-
-  .milestone:last-child {
-    border-bottom: none;
-  }
-
-  .id-field {
-    grid-template-columns: 52px 1fr;
-    font-size: 10px;
-  }
+  .milestone-rail { grid-template-columns: 1fr; }
+  .milestone      { border-left: none; border-bottom: 1px dashed var(--lark-border-2); padding: 8px 0; }
+  .milestone:last-child { border-bottom: none; }
+  .id-field       { grid-template-columns: 48px 1fr; font-size: 10px; }
+  .nav-overlay-label { font-size: 22px; }
 }
