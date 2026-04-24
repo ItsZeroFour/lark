@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  /* COLORS */
+  --lark-canvas:       #0E0E0E;
+  --lark-surface:      #161616;
+  --lark-surface-2:    #1A1A1A;
+  --lark-surface-3:    #202020;
+
+  --lark-fg:           #FFFFFF;
+  --lark-fg-2:         #CCCCCC;
+  --lark-fg-3:         #888888;
+  --lark-fg-4:         #555555;
+
+  --lark-accent:       #F5E642;
+  --lark-accent-hover: #E8D93B;
+  --lark-accent-dim:   #3A3612;
+
+  --lark-border:       #222222;
+  --lark-border-2:     #2A2A2A;
+  --lark-border-focus: var(--lark-accent);
+
+  /* TYPOGRAPHY */
+  --lark-font-display: 'Unbounded', 'Space Grotesk', sans-serif;
+  --lark-font-body:    'Manrope', 'Inter', sans-serif;
+  --lark-font-mono:    'IBM Plex Mono', monospace;
+
+  --lark-text-xs:   12px;
+  --lark-text-sm:   14px;
+  --lark-text-base: 16px;
+  --lark-text-md:   18px;
+  --lark-text-lg:   20px;
+  --lark-text-xl:   24px;
+  --lark-text-2xl:  32px;
+  --lark-text-3xl:  40px;
+  --lark-text-4xl:  56px;
+  --lark-text-5xl:  72px;
+
+  --lark-weight-regular:  400;
+  --lark-weight-medium:   500;
+  --lark-weight-semibold: 600;
+  --lark-weight-bold:     700;
+
+  --lark-leading-tight: 1.1;
+  --lark-leading-snug:  1.25;
+  --lark-leading-body:  1.5;
+  --lark-leading-loose: 1.7;
+
+  --lark-tracking-tight:   -0.02em;
+  --lark-tracking-tighter: -0.03em;
+  --lark-tracking-normal:   0;
+  --lark-tracking-wide:     0.04em;
+
+  /* SPACING (8px grid) */
+  --lark-space-1:  4px;
+  --lark-space-2:  8px;
+  --lark-space-3:  12px;
+  --lark-space-4:  16px;
+  --lark-space-5:  24px;
+  --lark-space-6:  32px;
+  --lark-space-7:  48px;
+  --lark-space-8:  64px;
+  --lark-space-9:  96px;
+  --lark-space-10: 128px;
+
+  /* RADII */
+  --lark-radius-0:   0;
+  --lark-radius-sm:  2px;
+  --lark-radius:     4px;
+  --lark-radius-md:  6px;
+  --lark-radius-lg:  8px;
+  --lark-radius-pill: 999px;
+
+  /* BORDERS */
+  --lark-border-hairline: 1px solid var(--lark-border);
+  --lark-accent-top:      2px solid var(--lark-accent);
+
+  /* MOTION */
+  --lark-ease:       cubic-bezier(0.2, 0, 0, 1);
+  --lark-dur-fast:   120ms;
+  --lark-dur:        180ms;
+  --lark-dur-slow:   280ms;
+
+  /* LAYOUT */
+  --lark-max-width:  1280px;
+  --lark-nav-height: 64px;
+}
