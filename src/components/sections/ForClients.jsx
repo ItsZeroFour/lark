@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ProjectSheet from '../cards/ProjectSheet';
 import { useReveal } from '../../hooks/useReveal';
 
@@ -24,7 +25,7 @@ export default function ForClients() {
                 <li><span className="n">III.</span><span className="t">Каждая поставка привязана к исполнителю.</span></li>
                 <li><span className="n">IV.</span><span className="t">Ни одна договорённость не теряется в переписке.</span></li>
               </ol>
-              <button className="cta-big">Опубликовать проект →</button>
+              <Link to="/apply?role=client" className="cta-big">Опубликовать проект →</Link>
             </div>
           </div>
         </div>

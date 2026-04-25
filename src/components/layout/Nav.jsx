@@ -3,30 +3,27 @@ import { Link, useLocation } from 'react-router-dom';
 import { Wordmark } from '../ui/Atoms';
 
 const LINKS = [
-  { id: 'platform', to: '/#platform', label: 'Платформа' },
-  { id: 'about',    to: '/about',     label: 'О нас' },
-  { id: 'team',     to: '/team',      label: 'Команда' },
-  { id: 'apply',    to: '/apply',     label: 'Заявка' },
+  { id: 'projects', to: '/projects', label: 'Проекты' },
+  { id: 'about',    to: '/about',    label: 'О нас' },
+  { id: 'team',     to: '/team',     label: 'Команда' },
+  { id: 'apply',    to: '/apply',    label: 'Заявка' },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
-  const activeId = pathname === '/'
-    ? 'home'
-    : pathname.startsWith('/about') ? 'about'
-    : pathname.startsWith('/team')  ? 'team'
-    : pathname.startsWith('/apply') ? 'apply'
+  const activeId = pathname.startsWith('/projects') ? 'projects'
+    : pathname.startsWith('/about')    ? 'about'
+    : pathname.startsWith('/team')     ? 'team'
+    : pathname.startsWith('/apply')    ? 'apply'
     : 'home';
 
-  // Блокируем скролл страницы пока меню открыто
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  // Закрываем при смене роута
   useEffect(() => { setOpen(false); }, [pathname]);
 
   const close = () => setOpen(false);
@@ -70,7 +67,6 @@ export default function Nav() {
         </div>
       </header>
 
-      {/* Полноэкранное оверлей-меню */}
       {open && (
         <div className="nav-overlay">
           <div className="nav-overlay-header">

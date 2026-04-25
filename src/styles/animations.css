@@ -240,11 +240,11 @@
 }
 
 /* --- TERMINAL: scan-line + периодический глитч --- */
-.terminal {
+/* overflow:hidden убран — ломал grid-layout и скрывал ::before лейбл */
+.terminal-body {
   position: relative;
-  overflow: hidden;
 }
-.terminal::after {
+.terminal-body::after {
   content: '';
   position: absolute;
   inset: 0;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useReveal } from '../../hooks/useReveal';
 
 export default function Hero() {
@@ -15,12 +16,21 @@ export default function Hero() {
         <span>стр. <strong>01 / 09</strong></span>
       </div>
 
+      {/*
+        Убрали .rotate — вызывал постоянный overflow на desktop.
+        Убрали .small superscript «в» — вертикальный сдвиг рвал строки.
+        Каждая строка в своём .hl-clip (overflow:hidden) для clip-анимации.
+      */}
       <h1 ref={headlineRef} className="hero-headline hero-headline-wrap">
-        <span className="hero-headline-line">
-          Войди <span className="small">в</span> <span className="y">систему.</span>
+        <span className="hl-clip">
+          <span className="hero-headline-line">
+            Войди в <span className="y">систему.</span>
+          </span>
         </span>
-        <span className="hero-headline-line">
-          <span className="outline">Строй</span> <span className="rotate">настоящее.</span>
+        <span className="hl-clip">
+          <span className="hero-headline-line">
+            <span className="outline">Строй</span> настоящее.
+          </span>
         </span>
       </h1>
 
@@ -36,8 +46,8 @@ export default function Hero() {
           </p>
         </div>
         <div className="col-3" data-stagger>
-          <button className="cta-big">Присоединиться <span>→</span></button>
-          <button className="cta-ghost">Смотреть проекты</button>
+          <Link to="/apply" className="cta-big">Присоединиться <span>→</span></Link>
+          <Link to="/projects" className="cta-ghost">Смотреть проекты</Link>
         </div>
       </div>
 
