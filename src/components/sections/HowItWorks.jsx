@@ -1,22 +1,26 @@
 import React from 'react';
+import { useReveal } from '../../hooks/useReveal';
 
 export default function HowItWorks() {
+  const headerRef = useReveal();
+  const nodesRef  = useReveal();
+
   return (
     <section className="schematic" id="platform">
       <div className="wrap">
-        <div className="schematic-header">
-          <div>
+        <div ref={headerRef} className="schematic-header" data-reveal="stagger">
+          <div data-stagger>
             <div className="mono mono-yellow">§ 002 · процесс</div>
             <h2>Как<br />работает<br />система.</h2>
           </div>
-          <aside>
+          <aside data-stagger>
             Три фазы. Между ними — обязательная передача контекста.{' '}
             <b>Ни один шаг не пропускается.</b>
           </aside>
         </div>
 
         <div className="schematic-diagram">
-          <div className="schematic-row">
+          <div ref={nodesRef} className="schematic-row" data-reveal="nodes">
             <div className="node">
               <div className="node-num">Фаза 01 / Заказ</div>
               <div className="node-title">Клиент публикует проект.</div>

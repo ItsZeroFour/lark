@@ -1,0 +1,429 @@
+/* ================================================================
+   Lark — animations.css
+   Импортируй в globals.css последней строкой: @import './animations.css';
+   ================================================================ */
+
+/* ================================================================
+   KEYFRAMES
+   ================================================================ */
+
+/* 1. Clip-reveal: текст въезжает снизу из-за горизонтального обрезания */
+@keyframes lark-clip-up {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(12px);
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+  }
+}
+
+/* 2. Fade-up: плавное появление снизу */
+@keyframes lark-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. Fade-in: просто прозрачность */
+@keyframes lark-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 4. Line-draw: горизонтальная линия вырастает слева */
+@keyframes lark-line-draw {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* 5. Counter-glow: число вспыхивает жёлтым при появлении */
+@keyframes lark-stat-glow {
+  0%   { color: var(--lark-fg-4); text-shadow: none; }
+  40%  { color: var(--lark-accent); text-shadow: 0 0 32px rgba(245, 230, 66, 0.6); }
+  100% { color: inherit; text-shadow: none; }
+}
+
+/* 6. Border-trace: рамка обрисовывается по периметру */
+@keyframes lark-border-trace {
+  0%   { clip-path: inset(0 100% 100% 0); }
+  25%  { clip-path: inset(0 0 100% 0); }
+  50%  { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+/* 7. Glitch: лёгкий хроматический сдвиг для терминала */
+@keyframes lark-glitch {
+  0%, 90%, 100% {
+    text-shadow: none;
+    transform: translateX(0);
+  }
+  92% {
+    text-shadow: -2px 0 rgba(245, 230, 66, 0.7), 2px 0 rgba(255, 80, 80, 0.4);
+    transform: translateX(1px);
+  }
+  94% {
+    text-shadow: 2px 0 rgba(245, 230, 66, 0.7), -2px 0 rgba(80, 180, 255, 0.4);
+    transform: translateX(-1px);
+  }
+  96% {
+    text-shadow: none;
+    transform: translateX(0);
+  }
+}
+
+/* 8. Scan-line: горизонтальная полоса медленно ползёт вниз */
+@keyframes lark-scan {
+  from { background-position: 0 -100%; }
+  to   { background-position: 0 200%; }
+}
+
+/* 9. Stamp-drop: печать падает и отскакивает */
+@keyframes lark-stamp {
+  0%   { opacity: 0; transform: rotate(8deg) scale(1.4); }
+  60%  { opacity: 1; transform: rotate(8deg) scale(0.92); }
+  80%  { transform: rotate(8deg) scale(1.04); }
+  100% { transform: rotate(8deg) scale(1); }
+}
+
+/* 10. Marquee уже есть — добавим паузу при hover */
+
+/* ================================================================
+   БАЗОВЫЕ КЛАССЫ-ТРИГГЕРЫ
+   Элемент получает .is-visible через IntersectionObserver (useReveal)
+   ================================================================ */
+
+/* --- Reveal: clip (для заголовков) --- */
+[data-reveal="clip"] {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(12px);
+  transition: none;
+}
+[data-reveal="clip"].is-visible {
+  animation: lark-clip-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Reveal: fade-up (для параграфов, кард, секций) --- */
+[data-reveal="fade"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+[data-reveal="fade"].is-visible {
+  animation: lark-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+/* --- Reveal: fade простой --- */
+[data-reveal="fade-plain"] {
+  opacity: 0;
+}
+[data-reveal="fade-plain"].is-visible {
+  animation: lark-fade-in 0.5s ease forwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* --- Reveal: stagger (контейнер, дочери с [data-stagger]) --- */
+[data-reveal="stagger"] [data-stagger] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+[data-reveal="stagger"].is-visible [data-stagger] {
+  animation: lark-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 90ms + 100ms);
+}
+
+/* ================================================================
+   СПЕЦИФИЧЕСКИЕ КОМПОНЕНТНЫЕ АНИМАЦИИ
+   ================================================================ */
+
+/* --- HERO HEADLINE: посимвольный въезд строк --- */
+.hero-headline-wrap {
+  overflow: hidden;
+}
+.hero-headline-line {
+  display: block;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(16px);
+}
+.hero-headline-wrap.is-visible .hero-headline-line {
+  animation: lark-clip-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-headline-wrap.is-visible .hero-headline-line:nth-child(1) { animation-delay: 0ms; }
+.hero-headline-wrap.is-visible .hero-headline-line:nth-child(2) { animation-delay: 120ms; }
+.hero-headline-wrap.is-visible .hero-headline-line:nth-child(3) { animation-delay: 220ms; }
+
+/* --- HERO META: линия появляется, текст въезжает --- */
+.hero-meta {
+  position: relative;
+}
+.hero-meta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--lark-border-2);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.hero-meta.is-visible::after {
+  animation: lark-line-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+/* --- STATS: свечение при въезде --- */
+.hero-stats.is-visible .stat-num {
+  animation: lark-stat-glow 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-stats.is-visible .stat:nth-child(1) .stat-num { animation-delay: 0ms; }
+.hero-stats.is-visible .stat:nth-child(2) .stat-num { animation-delay: 100ms; }
+.hero-stats.is-visible .stat:nth-child(3) .stat-num { animation-delay: 200ms; }
+.hero-stats.is-visible .stat:nth-child(4) .stat-num { animation-delay: 300ms; }
+
+/* --- MARQUEE: пауза при hover --- */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* --- SCHEMATIC NODES: появляются по очереди --- */
+[data-reveal="nodes"].is-visible .node:nth-child(1) {
+  animation: lark-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+[data-reveal="nodes"].is-visible .node:nth-child(2) {
+  animation: lark-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) 150ms forwards;
+}
+[data-reveal="nodes"].is-visible .node:nth-child(3) {
+  animation: lark-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) 280ms forwards;
+}
+[data-reveal="nodes"] .node {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* --- COLUMNS (Три столпа): цифры вырастают сверху вниз --- */
+[data-reveal="columns"].is-visible .column-num {
+  animation: lark-clip-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+[data-reveal="columns"].is-visible .column:nth-child(1) .column-num { animation-delay: 0ms; }
+[data-reveal="columns"].is-visible .column:nth-child(2) .column-num { animation-delay: 140ms; }
+[data-reveal="columns"].is-visible .column:nth-child(3) .column-num { animation-delay: 260ms; }
+[data-reveal="columns"] .column-num {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(12px);
+}
+
+/* --- ID CARD / PROJECT SHEET: border-trace при въезде --- */
+.id-card,
+.sheet {
+  position: relative;
+}
+.id-card::before,
+.sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--lark-accent);
+  pointer-events: none;
+  clip-path: inset(0 100% 100% 0);
+  transition: none;
+  z-index: 1;
+}
+.id-card.is-visible::before,
+.sheet.is-visible::before {
+  animation: lark-border-trace 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+/* --- TERMINAL: scan-line + периодический глитч --- */
+.terminal {
+  position: relative;
+  overflow: hidden;
+}
+.terminal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(245, 230, 66, 0.025) 50%,
+    transparent 100%
+  );
+  background-size: 100% 60px;
+  pointer-events: none;
+  animation: lark-scan 4s linear infinite;
+}
+.terminal-head .live {
+  animation: lark-glitch 6s infinite;
+}
+
+/* --- STAMP: анимация входа --- */
+.id-stamp {
+  clip-path: inset(0 0 0 0);
+}
+.id-card.is-visible .id-stamp {
+  animation: lark-stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+}
+
+/* --- INDEX LIST: пункты появляются по одному --- */
+[data-reveal="list"].is-visible .index-list li {
+  animation: lark-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+[data-reveal="list"].is-visible .index-list li:nth-child(1) { animation-delay: 0ms; }
+[data-reveal="list"].is-visible .index-list li:nth-child(2) { animation-delay: 80ms; }
+[data-reveal="list"].is-visible .index-list li:nth-child(3) { animation-delay: 160ms; }
+[data-reveal="list"].is-visible .index-list li:nth-child(4) { animation-delay: 240ms; }
+[data-reveal="list"] .index-list li {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* --- TIMELINE: точки и текст --- */
+[data-reveal="timeline"].is-visible .tl-item {
+  animation: lark-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+[data-reveal="timeline"].is-visible .tl-item:nth-child(1) { animation-delay: 0ms; }
+[data-reveal="timeline"].is-visible .tl-item:nth-child(2) { animation-delay: 100ms; }
+[data-reveal="timeline"].is-visible .tl-item:nth-child(3) { animation-delay: 200ms; }
+[data-reveal="timeline"].is-visible .tl-item:nth-child(4) { animation-delay: 300ms; }
+[data-reveal="timeline"].is-visible .tl-item:nth-child(5) { animation-delay: 400ms; }
+[data-reveal="timeline"] .tl-item {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* --- TEAM CARDS: поочерёдное появление --- */
+[data-reveal="team"].is-visible .team-card {
+  animation: lark-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+[data-reveal="team"].is-visible .team-card:nth-child(1) { animation-delay: 0ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(2) { animation-delay: 80ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(3) { animation-delay: 160ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(4) { animation-delay: 240ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(5) { animation-delay: 320ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(6) { animation-delay: 400ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(7) { animation-delay: 460ms; }
+[data-reveal="team"].is-visible .team-card:nth-child(8) { animation-delay: 520ms; }
+[data-reveal="team"] .team-card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* --- ADVISORS --- */
+[data-reveal="advisors"].is-visible .advisor {
+  animation: lark-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+[data-reveal="advisors"].is-visible .advisor:nth-child(1) { animation-delay: 0ms; }
+[data-reveal="advisors"].is-visible .advisor:nth-child(2) { animation-delay: 100ms; }
+[data-reveal="advisors"].is-visible .advisor:nth-child(3) { animation-delay: 200ms; }
+[data-reveal="advisors"] .advisor {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* --- PRINCIPLES: цифра слева + текст справа --- */
+[data-reveal="principles"].is-visible .principle {
+  animation: lark-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+[data-reveal="principles"].is-visible .principle:nth-child(1) { animation-delay: 0ms; }
+[data-reveal="principles"].is-visible .principle:nth-child(2) { animation-delay: 80ms; }
+[data-reveal="principles"].is-visible .principle:nth-child(3) { animation-delay: 160ms; }
+[data-reveal="principles"].is-visible .principle:nth-child(4) { animation-delay: 240ms; }
+[data-reveal="principles"].is-visible .principle:nth-child(5) { animation-delay: 320ms; }
+[data-reveal="principles"] .principle {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* --- NAV OVERLAY: ссылки въезжают --- */
+.nav-overlay-link {
+  opacity: 0;
+  transform: translateX(-16px);
+  animation: lark-overlay-link 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lark-overlay-link {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.nav-overlay-link:nth-child(1) { animation-delay: 60ms; }
+.nav-overlay-link:nth-child(2) { animation-delay: 120ms; }
+.nav-overlay-link:nth-child(3) { animation-delay: 180ms; }
+.nav-overlay-link:nth-child(4) { animation-delay: 240ms; }
+
+.nav-overlay-footer {
+  opacity: 0;
+  animation: lark-fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+}
+
+/* --- OVERLAY ВХОДИТ ЦЕЛИКОМ --- */
+.nav-overlay {
+  animation: lark-overlay-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lark-overlay-enter {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HOVER: карточки команды --- */
+.team-card {
+  transition: background 180ms ease;
+}
+.team-card:hover {
+  background: rgba(245, 230, 66, 0.03);
+}
+.team-card:hover .team-photo {
+  border-color: var(--lark-accent);
+  transition: border-color 200ms ease;
+}
+
+/* --- HOVER: advisor --- */
+.advisor {
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.advisor:hover {
+  border-color: var(--lark-accent);
+  background: rgba(245, 230, 66, 0.03);
+}
+
+/* --- HOVER: node-tag --- */
+.node-tag {
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.node-tag:hover {
+  background: var(--lark-accent);
+  color: #0E0E0E;
+  border-color: var(--lark-accent);
+}
+
+/* ================================================================
+   РАЗМЕРЫ ШРИФТОВ — ГЛОБАЛЬНЫЕ ПРАВКИ
+   ================================================================ */
+
+/* О НАС — hero headline (десктоп: уменьшен) */
+.about-hero-headline {
+  font-size: clamp(48px, 7.5vw, 96px) !important;
+}
+
+/* Финальный CTA "Готовы строить по-настоящему?" */
+.finale h2 {
+  font-size: clamp(52px, 8.5vw, 108px);
+}
+
+/* Ларкинс "Познакомьтесь с Ларкинсом." */
+.assistant h2 {
+  font-size: clamp(44px, 6.5vw, 88px);
+}
+
+/* Студентам "Собери настоящее портфолио." */
+.spread-left h2 {
+  font-size: clamp(32px, 4.2vw, 58px);
+}
+
+/* mobile.css перекроет с !important — это нормально */

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useReveal } from '../../hooks/useReveal';
 
 export default function LarkinsCallout() {
   const [text, setText] = useState('');
   const full = 'В вашей команде не хватает одной роли. Подобрать дизайнера?';
+  const leftRef     = useReveal();
+  const terminalRef = useReveal();
 
   useEffect(() => {
     let i = 0, active = true;
@@ -20,15 +23,15 @@ export default function LarkinsCallout() {
     <section className="assistant">
       <div className="wrap">
         <div className="assistant-grid">
-          <div>
-            <div className="kicker">§ 006 · проводник</div>
-            <h2>Познакомьтесь<br />с <span className="y">Ларкинсом.</span></h2>
-            <p>Он подскажет, где у проекта слабое место, какую роль закрыть первой и что уже можно отгружать.</p>
-            <p style={{ color: 'var(--lark-fg-3)', fontSize: 14 }}>
+          <div ref={leftRef} data-reveal="stagger">
+            <div className="kicker" data-stagger>§ 006 · проводник</div>
+            <h2 data-stagger>Познакомьтесь<br />с <span className="y">Ларкинсом.</span></h2>
+            <p data-stagger>Он подскажет, где у проекта слабое место, какую роль закрыть первой и что уже можно отгружать.</p>
+            <p data-stagger style={{ color: 'var(--lark-fg-3)', fontSize: 14 }}>
               Не чат-бот. Не персонаж. Внутренний голос системы — тихий, короткий, по делу.
             </p>
           </div>
-          <div className="terminal">
+          <div ref={terminalRef} className="terminal" data-reveal="fade">
             <div className="terminal-head">
               <span>сессия · 00482</span>
               <span className="live">в эфире</span>

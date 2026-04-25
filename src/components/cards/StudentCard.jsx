@@ -1,8 +1,11 @@
 import React from 'react';
+import { useReveal } from '../../hooks/useReveal';
 
 export default function StudentCard() {
+  const ref = useReveal();
+
   return (
-    <div className="id-card">
+    <div ref={ref} className="id-card" data-reveal="fade">
       <div className="id-card-header">
         <span>LARK · ID 00482</span>
         <span className="y">АКТИВЕН</span>

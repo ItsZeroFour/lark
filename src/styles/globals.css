@@ -1,5 +1,6 @@
 @import "./tokens.css";
 @import "./mobile.css";
+@import "./animations.css";
 
 * {
   box-sizing: border-box;

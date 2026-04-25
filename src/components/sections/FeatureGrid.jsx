@@ -1,14 +1,18 @@
 import React from 'react';
+import { useReveal } from '../../hooks/useReveal';
 
 export default function FeatureGrid() {
+  const headRef    = useReveal();
+  const columnsRef = useReveal();
+
   return (
     <section className="features" id="teams">
       <div className="wrap">
-        <div className="features-head">
-          <h2>Три<br />столпа.</h2>
-          <div className="meta">§ 005 · архитектура<br />редакция 2026.04<br />под. ред. редакции Lark</div>
+        <div ref={headRef} className="features-head" data-reveal="stagger">
+          <h2 data-stagger>Три<br />столпа.</h2>
+          <div className="meta" data-stagger>§ 005 · архитектура<br />редакция 2026.04<br />под. ред. редакции Lark</div>
         </div>
-        <div className="columns">
+        <div ref={columnsRef} className="columns" data-reveal="columns">
           <div className="column">
             <div className="column-num">01</div>
             <h3>Proof of Work</h3>
