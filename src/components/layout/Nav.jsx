@@ -6,6 +6,8 @@ const LINKS = [
   { id: 'projects', to: '/projects', label: 'Проекты' },
   { id: 'about',    to: '/about',    label: 'О нас' },
   { id: 'team',     to: '/team',     label: 'Команда' },
+  { id: 'guides',   to: '/guides',   label: 'Гайды' },
+  { id: 'docs',     to: '/docs',     label: 'Доки' },
   { id: 'apply',    to: '/apply',    label: 'Заявка' },
 ];
 
@@ -14,9 +16,11 @@ export default function Nav() {
   const { pathname } = useLocation();
 
   const activeId = pathname.startsWith('/projects') ? 'projects'
-    : pathname.startsWith('/about')    ? 'about'
-    : pathname.startsWith('/team')     ? 'team'
-    : pathname.startsWith('/apply')    ? 'apply'
+    : pathname.startsWith('/about')   ? 'about'
+    : pathname.startsWith('/team')    ? 'team'
+    : pathname.startsWith('/guides')  ? 'guides'
+    : pathname.startsWith('/docs')    ? 'docs'
+    : pathname.startsWith('/apply')   ? 'apply'
     : 'home';
 
   useEffect(() => {
@@ -68,7 +72,7 @@ export default function Nav() {
       </header>
 
       {open && (
-        <div className="nav-overlay">
+        <div className="nav-overlay" role="dialog" aria-modal="true" aria-label="Навигация">
           <div className="nav-overlay-header">
             <div className="topbar-ticker">
               <span>№ 001 / 2026</span>

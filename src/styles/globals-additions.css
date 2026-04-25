@@ -1,0 +1,217 @@
+/* ================================================================
+   ДОПОЛНЕНИЕ К globals.css
+   Вставить в конец файла src/styles/globals.css
+   ================================================================ */
+
+/* ====== NAV: 6 пунктов — уменьшаем gap ====== */
+.topbar-center { gap: 20px; }
+.topbar-center a { font-size: 10.5px; letter-spacing: 0.1em; }
+
+/* ====== GUIDES PAGE ====== */
+
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--lark-border-2);
+  border-left: 1px solid var(--lark-border-2);
+}
+
+.guide-card {
+  border-right: 1px solid var(--lark-border-2);
+  border-bottom: 1px solid var(--lark-border-2);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background 180ms;
+}
+
+.guide-card:hover {
+  background: rgba(245, 230, 66, 0.02);
+}
+
+.guide-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guide-title {
+  font-family: var(--lark-font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--lark-fg);
+}
+
+.guide-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--lark-fg-2);
+  margin: 0;
+  flex: 1;
+}
+
+.guide-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.guide-link {
+  color: var(--lark-accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  margin-top: auto;
+  padding-top: 4px;
+  transition: opacity 150ms;
+}
+
+.guide-link:hover {
+  opacity: 0.7;
+}
+
+/* ====== DOCS PAGE ====== */
+
+.doc-section {
+  margin-bottom: 64px;
+}
+
+.doc-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 24px 0 20px;
+  border-bottom: 1px solid var(--lark-fg);
+  margin-bottom: 0;
+}
+
+.doc-section-title {
+  font-family: var(--lark-font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-left: 1px solid var(--lark-border-2);
+}
+
+.doc-item {
+  border-right: 1px solid var(--lark-border-2);
+  border-bottom: 1px solid var(--lark-border-2);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background 180ms;
+  cursor: pointer;
+}
+
+.doc-item:hover {
+  background: rgba(245, 230, 66, 0.02);
+}
+
+.doc-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doc-item-title {
+  font-family: var(--lark-font-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--lark-fg);
+}
+
+.doc-item-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--lark-fg-2);
+  margin: 0;
+  flex: 1;
+}
+
+/* ====== RESPONSIVE: guides + docs ====== */
+@media (max-width: 1000px) {
+  .guides-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .doc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .doc-section-header {
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 0 16px;
+  }
+
+  .doc-section-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .guides-grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+  }
+
+  .guide-card {
+    border-left: 1px solid var(--lark-border-2);
+    padding: 20px 16px;
+    gap: 12px;
+  }
+
+  .guide-title {
+    font-size: 17px;
+  }
+
+  .doc-grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+  }
+
+  .doc-item {
+    border-left: 1px solid var(--lark-border-2);
+    padding: 18px 14px;
+  }
+
+  .doc-item-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 420px) {
+  .guide-card {
+    padding: 16px 12px;
+    gap: 10px;
+  }
+
+  .guide-title {
+    font-size: 15px;
+  }
+
+  .doc-item {
+    padding: 14px 12px;
+  }
+
+  .doc-item-title {
+    font-size: 14px;
+  }
+}

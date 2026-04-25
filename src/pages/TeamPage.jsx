@@ -21,10 +21,11 @@ const ADVISORS = [
 ];
 
 export default function TeamPage() {
-  const headlineRef  = useReveal();
-  const teamGridRef  = useReveal();
-  const advisorsRef  = useReveal();
-  const ctaRef       = useReveal();
+  const headlineRef = useReveal();
+  const heroBodyRef = useReveal();   /* ← FIX: ref was missing */
+  const teamGridRef = useReveal();
+  const advisorsRef = useReveal();
+  const ctaRef      = useReveal();
 
   return (
     <main>
@@ -34,17 +35,24 @@ export default function TeamPage() {
           <span>редакция <strong>2026.04</strong></span>
           <span>стр. <strong>03 / 09</strong></span>
         </div>
+
         <h1 ref={headlineRef} className="hero-headline hero-headline-wrap">
-          <span className="hero-headline-line">
-            <span className="outline">Восемь</span> <span className="y">человек</span>
+          <span className="hl-clip">
+            <span className="hero-headline-line">
+              <span className="outline">Восемь</span> <span className="y">человек</span>
+            </span>
           </span>
-          <span className="hero-headline-line">
-            и <span className="rotate">три</span> советника.
+          <span className="hl-clip">
+            <span className="hero-headline-line">
+              и три советника.
+            </span>
           </span>
         </h1>
-        <div className="hero-body" data-reveal="stagger">
+
+        {/* ← FIX: ref={heroBodyRef} добавлен */}
+        <div ref={heroBodyRef} className="hero-body" data-reveal="stagger">
           <div className="col-1" data-stagger>
-            <div>§ 009.0</div>
+            <div style={{ marginBottom: 18 }}>§ 009.0</div>
             <div>костяк</div>
             <div style={{ marginTop: 18, color: '#F5E642' }}>↓ люди ниже</div>
           </div>
@@ -84,7 +92,9 @@ export default function TeamPage() {
                 <div className="advisor-photo">{a.initials}</div>
                 <div>
                   <div className="advisor-name">{a.name}</div>
-                  <div className="mono" style={{ color: 'var(--lark-fg-3)', marginTop: 4 }}>{a.role} · {a.note}</div>
+                  <div className="mono" style={{ color: 'var(--lark-fg-3)', marginTop: 4 }}>
+                    {a.role} · {a.note}
+                  </div>
                 </div>
               </div>
             ))}
@@ -98,7 +108,9 @@ export default function TeamPage() {
             <div className="mono mono-yellow">§ 009.3</div>
             <h3>Откликнуться в команду.</h3>
           </div>
-          <Link className="cta-big" to="/apply" data-stagger>Вакансии и отклик <span>→</span></Link>
+          <Link className="cta-big" to="/apply" data-stagger>
+            Вакансии и отклик <span>→</span>
+          </Link>
         </div>
       </section>
     </main>
