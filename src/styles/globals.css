@@ -1,4 +1,5 @@
 @import './tokens.css';
+@import './mobile.css';
 @import './animations.css';
 
 * { box-sizing: border-box; }
@@ -27,7 +28,7 @@ button { font-family: inherit; }
 .marker { display: inline-block; background: var(--lark-accent); color: #0E0E0E; padding: 0 8px; }
 
 /* ====== CONTAINER ====== */
-.wrap { max-width: 1360px; margin: 0 auto; padding: 0 48px; position: relative; }
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0; position: relative; }
 
 /* ====== WORDMARK ====== */
 .wordmark { font-family: var(--lark-font-display); font-size: 22px; font-weight: 800; letter-spacing: -0.06em; display: inline-flex; align-items: baseline; color: var(--lark-fg); }
@@ -106,7 +107,7 @@ button { font-family: inherit; }
 .hero-headline {
   font-family: var(--lark-font-display);
   font-weight: 800;
-  font-size: clamp(72px, 12vw, 180px);
+  font-size: clamp(72px, 12vw, 140px);
   line-height: 0.88;
   letter-spacing: -0.055em;
   color: var(--lark-fg);
@@ -165,7 +166,7 @@ button { font-family: inherit; }
 .spread.reverse .spread-grid { grid-template-columns: 7fr 5fr; }
 .spread-left .kicker { font-family: var(--lark-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lark-accent); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
 .spread-left .kicker::before { content: "§"; font-family: var(--lark-font-display); font-size: 18px; color: var(--lark-accent); }
-.spread-left h2 { font-family: var(--lark-font-display); font-size: clamp(40px, 4.8vw, 68px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; margin: 0 0 32px; overflow-wrap: break-word; }
+.spread-left h2 { font-family: var(--lark-font-display); font-size: clamp(40px, 4.8vw, 64px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; margin: 0 0 32px; overflow-wrap: break-word; }
 .spread-left h2 .y { color: var(--lark-accent); }
 .spread-left p.lede { font-size: 19px; line-height: 1.45; color: var(--lark-fg); max-width: 34ch; margin: 0 0 40px; }
 .index-list { list-style: none; padding: 0; margin: 0 0 40px; border-top: 1px solid var(--lark-border-2); }
@@ -224,7 +225,7 @@ button { font-family: inherit; }
 
 /* ====== FEATURES ====== */
 .features { padding: 120px 0; border-bottom: 1px solid var(--lark-fg); }
-.features-head { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: end; margin-bottom: 64px; padding-bottom: 24px; border-bottom: 1px solid var(--lark-fg); }
+.features-head { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: end; border-bottom: 1px solid var(--lark-fg); }
 .features-head h2 { font-family: var(--lark-font-display); font-size: clamp(56px, 9vw, 120px); font-weight: 800; letter-spacing: -0.05em; line-height: 0.88; margin: 0; }
 .features-head .meta { font-family: var(--lark-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lark-fg-3); justify-self: end; text-align: right; line-height: 1.7; }
 .columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
@@ -240,7 +241,7 @@ button { font-family: inherit; }
 /* ====== ASSISTANT / LARKINS ====== */
 .assistant { padding: 120px 0; border-bottom: 1px solid var(--lark-fg); background: var(--lark-canvas); }
 .assistant-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center; }
-.assistant h2 { font-family: var(--lark-font-display); font-size: clamp(56px, 8vw, 75px); font-weight: 800; letter-spacing: -0.05em; line-height: 0.86; margin: 20px 0 24px; }
+.assistant h2 { font-family: var(--lark-font-display); font-size: clamp(36px, 8vw, 50px); font-weight: 800; letter-spacing: -0.05em; line-height: 0.86; margin: 20px 0 24px; }
 .assistant h2 .y { color: var(--lark-accent); }
 .assistant p { font-size: 18px; line-height: 1.5; color: var(--lark-fg-2); max-width: 34ch; margin: 0 0 28px; }
 .assistant .kicker { font-family: var(--lark-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lark-accent); }
@@ -267,7 +268,7 @@ button { font-family: inherit; }
 .finale::before { content: "★★★"; position: absolute; top: 20px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 14px; letter-spacing: 2em; }
 .finale::after { content: "★★★"; position: absolute; bottom: 20px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 14px; letter-spacing: 2em; }
 .finale-inner { text-align: center; }
-.finale h2 { font-family: var(--lark-font-display); font-size: clamp(64px, 11vw, 168px); font-weight: 800; letter-spacing: -0.055em; line-height: 0.86; margin: 0 0 40px; }
+.finale h2 { font-family: var(--lark-font-display); font-size: clamp(64px, 11vw, 120px); font-weight: 800; letter-spacing: -0.055em; line-height: 0.86; margin: 0 0 40px; }
 .finale .meta { font-family: var(--lark-font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 20px; }
 .finale-ctas { display: flex; gap: 16px; justify-content: center; }
 .finale-ctas .dark { background: #0E0E0E; color: var(--lark-accent); padding: 18px 32px; border: none; cursor: pointer; font-family: var(--lark-font-display); font-size: 16px; font-weight: 700; letter-spacing: -0.02em; text-transform: uppercase; }
@@ -291,7 +292,7 @@ button { font-family: inherit; }
 .colophon-bar .right { flex: 1; text-align: right; }
 
 /* ====== ABOUT PAGE ====== */
-.page-hero { padding: 40px 0 80px; }
+.page-hero { padding: 40px 0 0px; }
 .about-intro { padding: 96px 0; border-bottom: 1px solid var(--lark-border-2); }
 .about-intro-grid { display: grid; grid-template-columns: 200px 1fr; gap: 80px; align-items: start; }
 .about-lede p { font-size: 20px; line-height: 1.6; color: var(--lark-fg-2); margin: 0 0 24px; max-width: 52ch; }
@@ -317,7 +318,7 @@ button { font-family: inherit; }
 .cta-strip-inner h3 { font-family: var(--lark-font-display); font-size: 48px; font-weight: 700; letter-spacing: -0.03em; margin: 8px 0 0; line-height: 1; }
 
 /* ====== TEAM PAGE ====== */
-.team-sec { padding: 96px 0; border-bottom: 1px solid var(--lark-border-2); }
+.team-sec { padding: 0; border-bottom: 1px solid var(--lark-border-2); }
 .team-grid-real { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--lark-border-2); }
 .team-card { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 32px; border-bottom: 1px solid var(--lark-border-2); border-right: 1px solid var(--lark-border-2); align-items: start; }
 .team-card:nth-child(2n) { border-right: none; }

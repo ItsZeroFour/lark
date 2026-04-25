@@ -297,3 +297,179 @@ h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
   .id-field       { grid-template-columns: 48px 1fr; font-size: 10px; }
   .nav-overlay-label { font-size: 22px; }
 }
+
+/* ================================================================
+   PROJECTS PAGE — мобильная версия
+   ================================================================ */
+
+/* ≤ 1000px */
+@media (max-width: 1000px) {
+
+  /* Hero страницы проектов */
+  .proj-section {
+    padding: 48px 0 80px;
+  }
+
+  /* Заголовок "Реальные / проекты." — уменьшаем */
+  .proj-section ~ section .hero-headline,
+  .page-hero .hero-headline {
+    font-size: clamp(36px, 9.5vw, 56px) !important;
+  }
+
+  /* Фильтры — в строку со скроллом */
+  .proj-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 16px;
+  }
+
+  .proj-filters-label {
+    display: none;
+  }
+
+  .proj-filter-btns {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    width: 100%;
+  }
+
+  .proj-filter-btns::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proj-filter-btn {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 10px;
+    border-right: none !important;
+    border: 1px solid var(--lark-border-2);
+    margin-right: -1px;
+  }
+
+  .proj-filter-btn:last-child {
+    border-right: 1px solid var(--lark-border-2) !important;
+    margin-right: 0;
+  }
+
+  /* Сетка — 1 колонка */
+  .proj-grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+  }
+
+  .proj-card {
+    border-left: 1px solid var(--lark-border-2);
+    padding: 24px 16px;
+    gap: 14px;
+  }
+
+  .proj-title {
+    font-size: 20px;
+  }
+
+  /* Фазы — без подписей, компактно */
+  .proj-phase-label {
+    display: none;
+  }
+
+  /* Футер карточки — стек */
+  .proj-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Кнопка — на всю ширину */
+  .proj-apply-btn {
+    width: 100%;
+    justify-content: center !important;
+    box-sizing: border-box;
+  }
+}
+
+/* ≤ 600px */
+@media (max-width: 600px) {
+
+  .proj-section {
+    padding: 32px 0 64px;
+  }
+
+  .proj-card {
+    padding: 18px 14px;
+    gap: 12px;
+  }
+
+  .proj-title {
+    font-size: 18px;
+  }
+
+  .proj-brief {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Прогресс и фазы */
+  .proj-phases {
+    margin-top: 4px;
+  }
+
+  .proj-phase-bar {
+    height: 3px;
+  }
+
+  /* Роли — чуть меньше */
+  .proj-role {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  /* Стек тегов */
+  .proj-tag {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  /* Карточка-голова */
+  .proj-card-head {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* CTA-секция внизу страницы */
+  .cta-strip-inner h3 {
+    font-size: 24px !important;
+  }
+}
+
+/* ≤ 420px */
+@media (max-width: 420px) {
+
+  .proj-card {
+    padding: 16px 12px;
+    gap: 10px;
+  }
+
+  .proj-title {
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .proj-brief {
+    font-size: 12px;
+  }
+
+  .proj-filter-btn {
+    padding: 7px 12px;
+    font-size: 9px;
+  }
+
+  /* Прогресс бар */
+  .proj-progress-row {
+    gap: 8px;
+  }
+}
